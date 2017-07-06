@@ -1,0 +1,6 @@
+framework module YYLrefresh {
+  umbrella header "YYLrefresh-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,16 @@
+PODS:
+  - YYLrefresh (0.1.0)
+
+DEPENDENCIES:
+  - YYLrefresh (from `../`)
+
+EXTERNAL SOURCES:
+  YYLrefresh:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  YYLrefresh: e2d9d18e326524e831c87d4f4b8b1f382aae2d2a
+
+PODFILE CHECKSUM: c307e6194f2ed2c5243e1a53a47aac11edea1fb9
+
+COCOAPODS: 1.2.1

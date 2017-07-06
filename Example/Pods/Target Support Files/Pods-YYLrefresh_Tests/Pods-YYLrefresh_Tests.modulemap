@@ -1,0 +1,6 @@
+framework module Pods_YYLrefresh_Tests {
+  umbrella header "Pods-YYLrefresh_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
