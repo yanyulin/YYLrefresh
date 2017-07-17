@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YYLrefresh'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'UITableView 的辅助页面'
 
 # This description is used to generate tags and improve search results.
@@ -32,11 +32,11 @@ Pod::Spec.new do |s|
 
   s.source_files = 'YYLrefresh/Classes/**/*'
 
-#s.resources  = 'YYLrefresh/Assets/*'
+  s.resources  = 'YYLrefresh/Assets/*'
 
- s.resource_bundles = {
-   'YYLrefresh' => ['YYLrefresh/Assets/*']
- }
+# s.resource_bundles = {
+#   'YYLrefresh' => ['YYLrefresh/Assets/*.png']
+# }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

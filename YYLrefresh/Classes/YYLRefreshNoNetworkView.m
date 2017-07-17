@@ -31,7 +31,7 @@
 
 - (UIImageView *)tipImageView {
     if (!_tipImageView) {
-        _tipImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"RefreshTableView.bundle/refreshtableview_nonetwork"]];
+        _tipImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"RefreshTableView.bundle/refreshtableview_nonetwork.png"]];
     }
     return _tipImageView;
 }

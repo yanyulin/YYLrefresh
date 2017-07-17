@@ -1,7 +1,10 @@
 use_frameworks!
 
 target 'YYLrefresh_Example' do
-  pod 'YYLrefresh', :path => '../'
+#  pod 'YYLrefresh', :path => '../'
+
+    pod 'MJRefresh'
+    pod 'Masonry'
 
   target 'YYLrefresh_Tests' do
     inherit! :search_paths
