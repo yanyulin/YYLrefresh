@@ -32,11 +32,11 @@ Pod::Spec.new do |s|
 
   s.source_files = 'YYLrefresh/Classes/**/*'
 
-  s.resources  = 'YYLrefresh/Assets/*'
+#s.resources  = 'YYLrefresh/Assets/*'
 
-# s.resource_bundles = {
-#   'YYLrefresh' => ['YYLrefresh/Assets/*']
-# }
+ s.resource_bundles = {
+   'YYLrefresh' => ['YYLrefresh/Assets/*']
+ }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
