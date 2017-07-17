@@ -13,7 +13,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        
+        self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.tipImageView];
         [self addSubview:self.tipLabel];
     }

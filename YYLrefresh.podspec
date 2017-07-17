@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'YYLrefresh'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of YYLrefresh.'
+  s.summary          = 'UITableView 的辅助页面'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-        UITableView 的辅助页面
+        UITableView 的辅助页面, 包括无数据提示，无网络提示，请求出错提示
                        DESC
 
   s.homepage         = 'https://github.com/yanyulin/YYLrefresh'
@@ -32,9 +32,11 @@ Pod::Spec.new do |s|
 
   s.source_files = 'YYLrefresh/Classes/**/*'
 
-  s.resource_bundles = {
-    'YYLrefresh' => ['YYLrefresh/Assets/*']
-  }
+  s.resources  = 'YYLrefresh/Assets/*'
+
+# s.resource_bundles = {
+#   'YYLrefresh' => ['YYLrefresh/Assets/*']
+# }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
