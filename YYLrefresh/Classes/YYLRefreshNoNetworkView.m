@@ -6,19 +6,13 @@
 //  Copyright © 2016年 YunNan YunDi Tech CO,LTD. All rights reserved.
 //
 
-#import "RCRefreshNoNetworkView.h"
+#import "YYLRefreshNoNetworkView.h"
 
-#import "UIColor+Additions.h"
-#import "UIFont+Additions.h"
-#import "UIView+Factory.h"
-#import "UIView+Positioning.h"
-#import "RCAlertView.h"
-
-@implementation RCRefreshNoNetworkView
+@implementation YYLRefreshNoNetworkView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor themeBackgroundColor];
+        self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.tipImageView];
         [self addSubview:self.tipLabel];
         [self addSubview:self.tipButton];
@@ -30,21 +24,26 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.tipImageView.frame = CGRectMake((self.width - 150)/2, 74, 150, 150);
-    self.tipLabel.frame = CGRectMake(0, self.tipImageView.bottom + 20, self.width, 20);
-    self.tipButton.frame = CGRectMake((self.width - 120)/2, self.tipLabel.bottom + 30, 120, 40);
+    self.tipImageView.frame = CGRectMake((self.frame.size.width - 150)/2, 74, 150, 150);
+    self.tipLabel.frame = CGRectMake(0, self.tipImageView.frame.origin.y + self.tipImageView.frame.size.height + 20, self.frame.size.width, 20);
+    self.tipButton.frame = CGRectMake((self.frame.size.width - 120)/2, self.tipLabel.frame.origin.y + self.tipLabel.frame.size.height + 30, 120, 40);
 }
 
 - (UIImageView *)tipImageView {
     if (!_tipImageView) {
-        _tipImageView = [UIImageView imageViewWithFrame:CGRectZero imageName:@"RefreshTableView.bundle/refreshtableview_nonetwork"];
+        _tipImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"RefreshTableView.bundle/refreshtableview_nonetwork"]];
     }
     return _tipImageView;
 }
 
 - (UILabel *)tipLabel {
     if (!_tipLabel) {
-        _tipLabel = [UILabel labelWithFrame:CGRectZero text:@"网络连接异常, 重新检查网络吧" font:[UIFont b5Font_15] textColor:[UIColor disableTitleColor] alignment:NSTextAlignmentCenter backgroundColor:[UIColor clearColor] tag:0];
+        _tipLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _tipLabel.text = @"网络连接异常, 重新检查网络吧";
+        _tipLabel.font = [UIFont systemFontOfSize:15];
+        _tipLabel.textColor = [UIColor grayColor];
+        _tipLabel.textAlignment = NSTextAlignmentCenter;
+        _tipLabel.backgroundColor = [UIColor clearColor];
         _tipLabel.numberOfLines = 0;
     }
     return _tipLabel;
@@ -54,19 +53,19 @@
     if (!_tipButton) {
         _tipButton = [[UIButton alloc] initWithFrame:CGRectZero];
         [_tipButton setTitle:@"点击刷新" forState: UIControlStateNormal];
-        [_tipButton setTitleColor:[UIColor themeColor] forState:UIControlStateNormal];
-        _tipButton.titleLabel.font = [UIFont b5Font_15];
+        [_tipButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        _tipButton.titleLabel.font = [UIFont systemFontOfSize:15];
         _tipButton.layer.cornerRadius = 5;
         _tipButton.clipsToBounds = YES;
         _tipButton.layer.borderWidth = 1.0f;
-        _tipButton.layer.borderColor = [UIColor themeColor].CGColor;
+        _tipButton.layer.borderColor = [UIColor blueColor].CGColor;
         [_tipButton addTarget:self action:@selector(tipButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _tipButton;
 }
 
 - (void)tipButtonClick:(UIButton *)button {
-    [RCAlertView showLoadingWithTitle:kLoading inView:self.superview.superview];
+//    [RCAlertView showLoadingWithTitle:kLoading inView:self.superview.superview];
     !self.refreshNoNetworkViewBlock ?: self.refreshNoNetworkViewBlock();
 }
 

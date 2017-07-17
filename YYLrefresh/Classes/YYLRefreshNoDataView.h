@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RCRefreshNoDataView : UIView
+@interface YYLRefreshNoDataView : UIView
 
 @property (nonatomic, strong) UIImageView *tipImageView;
 

@@ -10,7 +10,7 @@
 
 typedef void(^RCRefreshNoNetworkViewBlock)();
 
-@interface RCRefreshNoNetworkView : UIView
+@interface YYLRefreshNoNetworkView : UIView
 
 @property (nonatomic, strong) UIImageView *tipImageView;
 

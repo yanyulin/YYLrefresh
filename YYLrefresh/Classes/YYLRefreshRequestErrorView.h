@@ -10,7 +10,7 @@
 
 typedef void(^RCRefreshRequestErrorViewBlock)();
 
-@interface RCRefreshRequestErrorView : UIView
+@interface YYLRefreshRequestErrorView : UIView
 
 @property (nonatomic, strong) UIImageView *tipImageView;
 

@@ -18,5 +18,14 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "YYLrefresh/Classes/**/*"
+  "source_files": "YYLrefresh/Classes/**/*",
+  "resources": "YYLrefresh/Assets/RefreshTableView.bundle",
+  "dependencies": {
+    "MJRefresh": [
+
+    ],
+    "Masonry": [
+
+    ]
+  }
 }

@@ -10,6 +10,10 @@
 #endif
 #endif
 
+#import "UITableView+Refresh.h"
+#import "YYLRefreshNoDataView.h"
+#import "YYLRefreshNoNetworkView.h"
+#import "YYLRefreshRequestErrorView.h"
 
 FOUNDATION_EXPORT double YYLrefreshVersionNumber;
 FOUNDATION_EXPORT const unsigned char YYLrefreshVersionString[];

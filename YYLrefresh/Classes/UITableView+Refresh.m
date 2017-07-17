@@ -8,14 +8,9 @@
 
 #import "UITableView+Refresh.h"
 #import "MJRefresh.h"
-#import "RCConstFile.h"
-#import "RCAlertView.h"
-#import "UIColor+Additions.h"
-#import "YDRefreshHeader.h"
-#import "RCRefreshNoNetworkView.h"
-#import "RCRefreshRequestErrorView.h"
-#import "RCRefreshNoDataView.h"
-#import "UIView+Positioning.h"
+#import "YYLRefreshNoNetworkView.h"
+#import "YYLRefreshRequestErrorView.h"
+#import "YYLRefreshNoDataView.h"
 #import "Masonry.h"
 
 static char headerRefreshingBlockKey;
@@ -65,11 +60,12 @@ static char isFirstLoadingKey;
 }
 
 - (UIView *)refreshNoNetworkView {
-    RCRefreshNoNetworkView *rNoNetworkView = objc_getAssociatedObject(self, &refreshNoNetworkViewKey);
+    YYLRefreshNoNetworkView *rNoNetworkView = objc_getAssociatedObject(self, &refreshNoNetworkViewKey);
     if (!rNoNetworkView) {
-        CGRect frame = CGRectMake(0, 0, self.width, self.height);
-        rNoNetworkView = [[RCRefreshNoNetworkView alloc] initWithFrame:frame];
-        WEAK_SELF
+        CGRect frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        rNoNetworkView = [[YYLRefreshNoNetworkView alloc] initWithFrame:frame];
+        
+        __weak typeof(self) weakSelf = self;
         rNoNetworkView.refreshNoNetworkViewBlock = ^() {
 //            weakSelf.loadErrorType = RCLoadErrorTypeDefalt;
             !weakSelf.headerRefreshingBlock? :weakSelf.headerRefreshingBlock();
@@ -86,11 +82,11 @@ static char isFirstLoadingKey;
 }
 
 - (UIView *)refreshRequestErrorView {
-    RCRefreshRequestErrorView *rRequestErrorView = objc_getAssociatedObject(self, &refreshRequestErrorViewKey);
+    YYLRefreshRequestErrorView *rRequestErrorView = objc_getAssociatedObject(self, &refreshRequestErrorViewKey);
     if (!rRequestErrorView) {
-        CGRect frame = CGRectMake(0, 0, self.width, self.height);
-        rRequestErrorView = [[RCRefreshRequestErrorView alloc] initWithFrame:frame];
-        WEAK_SELF
+        CGRect frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        rRequestErrorView = [[YYLRefreshRequestErrorView alloc] initWithFrame:frame];
+        __weak typeof(self) weakSelf = self;
         rRequestErrorView.refreshRequestErrorViewBlock = ^() {
 //            weakSelf.loadErrorType = RCLoadErrorTypeDefalt;
             !weakSelf.headerRefreshingBlock? :weakSelf.headerRefreshingBlock();
@@ -100,7 +96,7 @@ static char isFirstLoadingKey;
     return rRequestErrorView;
 }
 
-- (void)setRefreshRequestErrorView:(RCRefreshRequestErrorView *)refreshRequestErrorView {
+- (void)setRefreshRequestErrorView:(YYLRefreshRequestErrorView *)refreshRequestErrorView {
     if (refreshRequestErrorView) {
         objc_setAssociatedObject(self, &refreshRequestErrorViewKey, refreshRequestErrorView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
@@ -109,8 +105,8 @@ static char isFirstLoadingKey;
 - (UIView *)refreshNoDataView {
     UIView *rNoDataView = objc_getAssociatedObject(self, &refreshNoDataViewKey);
     if (!rNoDataView) {
-        CGRect frame = CGRectMake(0, 0, self.width, self.height);
-        rNoDataView = [[RCRefreshNoDataView alloc] initWithFrame:frame];
+        CGRect frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        rNoDataView = [[YYLRefreshNoDataView alloc] initWithFrame:frame];
         objc_setAssociatedObject(self, &refreshNoDataViewKey, rNoDataView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return rNoDataView;
@@ -125,9 +121,9 @@ static char isFirstLoadingKey;
 
 #pragma mark - 刷新表格方法
 #pragma mark- 设置上啦 下啦刷新
-- (YDRefreshHeader*)re_mj_header {
-    WEAK_SELF
-    return [YDRefreshHeader headerWithRefreshingBlock:^{
+- (MJRefreshNormalHeader*)re_mj_header {
+    __weak typeof(self) weakSelf = self;
+    return [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         weakSelf.isFirstLoading = YES;
 //        weakSelf.loadErrorType = RCLoadErrorTypeDefalt;
         !weakSelf.headerRefreshingBlock? :weakSelf.headerRefreshingBlock();
@@ -135,7 +131,7 @@ static char isFirstLoadingKey;
 }
 
 - (MJRefreshBackNormalFooter*)re_mj_footer {
-    WEAK_SELF
+    __weak typeof(self) weakSelf = self;
     return [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         weakSelf.isFirstLoading = NO;
         !weakSelf.footerRefreshingBlock? :weakSelf.footerRefreshingBlock();
@@ -222,7 +218,7 @@ static char isFirstLoadingKey;
     } else {
         [self endRefreshing];
     }
-    [RCAlertView hideAll:YES inView:view];
+//    [RCAlertView hideAll:YES inView:view];
 }
 
 - (void)handleRequestErrorWithCode:(NSInteger)code httpMsg:(NSString *)httpMsg inView:(UIView *)view {
@@ -230,8 +226,8 @@ static char isFirstLoadingKey;
         self.loadErrorType = (code == NSURLErrorNotConnectedToInternet? RCLoadErrorTypeNoNetwork: RCLoadErrorTypeRequest);
     } else {
         [self endRefreshing];
-        [RCAlertView showWithTitle:httpMsg hideAllHudInView:view];
+//        [RCAlertView showWithTitle:httpMsg hideAllHudInView:view];
     }
-    [RCAlertView hideAll:YES inView:view];
+//    [RCAlertView hideAll:YES inView:view];
 }
 @end
