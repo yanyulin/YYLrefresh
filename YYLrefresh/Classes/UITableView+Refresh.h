@@ -36,7 +36,6 @@ typedef void(^RERefreshTableViewRefreshingBlock)(void);
  */
 @property(nonatomic, assign) BOOL isDataLoaded;
 
-
 /**
  是否第一次加载
  */
