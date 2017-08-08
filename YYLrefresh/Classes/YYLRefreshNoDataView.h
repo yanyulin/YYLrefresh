@@ -13,5 +13,6 @@
 @property (nonatomic, strong) UIImageView *tipImageView;
 
 @property (nonatomic, strong) UILabel *tipLabel;
- 
+
+
 @end
