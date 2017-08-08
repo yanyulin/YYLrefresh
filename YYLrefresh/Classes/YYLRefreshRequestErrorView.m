@@ -32,7 +32,7 @@
 
 - (UIImageView *)tipImageView {
     if (!_tipImageView) {
-        _tipImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"RefreshTableView.bundle/refreshtableview_requesterror"]];
+        _tipImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"RefreshTableView.bundle/refreshtableview_requesterror" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
     }
     return _tipImageView;
 }
@@ -54,12 +54,12 @@
     if (!_tipButton) {
         _tipButton = [[UIButton alloc] initWithFrame:CGRectZero];
         [_tipButton setTitle:@"点击刷新" forState: UIControlStateNormal];
-        [_tipButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [_tipButton setTitleColor:[UIColor colorWithRed:36/255.0 green:191.0/255.0 blue:161.0/255.0 alpha:1.0] forState:UIControlStateNormal];
         _tipButton.titleLabel.font = [UIFont systemFontOfSize:15];
         _tipButton.layer.cornerRadius = 5;
         _tipButton.clipsToBounds = YES;
         _tipButton.layer.borderWidth = 1.0f;
-        _tipButton.layer.borderColor = [UIColor blueColor].CGColor;
+        _tipButton.layer.borderColor = [UIColor colorWithRed:36/255.0 green:191.0/255.0 blue:161.0/255.0 alpha:1.0].CGColor;
         [_tipButton addTarget:self action:@selector(tap) forControlEvents:UIControlEventTouchUpInside];
     }
     return _tipButton;

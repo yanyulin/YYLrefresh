@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YYLrefresh'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'UITableView 的辅助页面'
 
 # This description is used to generate tags and improve search results.

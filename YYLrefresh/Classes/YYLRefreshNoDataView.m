@@ -29,7 +29,8 @@
 
 - (UIImageView *)tipImageView {
     if (!_tipImageView) {
-        _tipImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"RefreshTableView.bundle/refreshtableview_defaultnodata"]];
+        
+        _tipImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"RefreshTableView.bundle/refreshtableview_defaultnodata" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
     }
     return _tipImageView;
 }
