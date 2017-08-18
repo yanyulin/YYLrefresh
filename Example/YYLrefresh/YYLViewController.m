@@ -7,7 +7,7 @@
 //
 
 #import "YYLViewController.h"
-#import "UITableView+Refresh.h"
+#import "UIScrollView+Refresh.h"
 #import <MJRefresh/MJRefresh.h>
 
 @interface YYLViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -40,28 +40,30 @@
     NSInteger index = segmentedControl.selectedSegmentIndex;
     switch (index) {
         case 0:
-            self.tableView.loadErrorType = RCLoadErrorTypeDefalt;
+            self.tableView.loadErrorType = YYLLoadErrorTypeDefalt;
             break;
         case 1:
-            self.tableView.loadErrorType = RCLoadErrorTypeRequest;
+            self.tableView.loadErrorType = YYLLoadErrorTypeRequest;
             break;
         case 2:
-            self.tableView.loadErrorType = RCLoadErrorTypeNoNetwork;
+            self.tableView.loadErrorType = YYLLoadErrorTypeNoNetwork;
             break;
         case 3:
-            self.tableView.loadErrorType = RCLoadErrorTypeNoData;
+            self.tableView.loadErrorType = YYLLoadErrorTypeNoData;
             break;
         default:
             break;
     }
 }
 
-//模拟网络请求
+
+/**
+ 模拟网络请求
+ */
 - (void)loadData {
-    
     __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [weakSelf.dataArrayM addObjectsFromArray:@[@"测试", @"测试", @"测试", @"测试", @"测试"]];
+        [weakSelf.dataArrayM addObjectsFromArray:@[@"测试", @"测试", @"测试", @"测试", @"测试", @"测试", @"测试", @"测试", @"测试", @"测试"]];
         [weakSelf.tableView endRefreshing];
     });
 }
@@ -85,7 +87,9 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %zd", self.dataArrayM[indexPath.row], indexPath.row];
+    if (indexPath.row < self.dataArrayM.count) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %zd", self.dataArrayM[indexPath.row], indexPath.row];
+    }
     return cell;
 }
 
@@ -94,15 +98,18 @@
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        //显示下拉加载功能
         _tableView.isShowHeaderRefresh = YES;
+        //显示上啦刷新功能
         _tableView.isShowFooterRefresh = YES;
         __weak typeof(self) weakSelf = self;
         _tableView.headerRefreshingBlock = ^{
             [weakSelf.dataArrayM removeAllObjects];
+            //请求数据
             [weakSelf loadData];
         };
         _tableView.footerRefreshingBlock = ^{
-            
+            //请求数据
             [weakSelf loadData];
         };
     }
@@ -113,6 +120,7 @@
     if (!_segmentedControl) {
         _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"有数据",@"请求出错", @"无网络", @"无数据"]];
         _segmentedControl.selectedSegmentIndex = 0;
+        _segmentedControl.tintColor = [UIColor colorWithRed:36/255.0 green:191.0/255.0 blue:161.0/255.0 alpha:1.0];
         [_segmentedControl addTarget:self action:@selector(segmentedControlValueChange:) forControlEvents:UIControlEventValueChanged];
     }
     return _segmentedControl;
